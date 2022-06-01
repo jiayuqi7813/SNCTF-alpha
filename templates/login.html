@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{template "head.html"}}
+</head>
+<body>
+{{template "navbar.html"}}
+<div class="container" id="indexwrapper">
+    <div class="clearfix" style="margin-bottom: 100px;"></div>
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            {{if .Error}}
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{.Msg}}
+                </div>
+            {{end}}
+            {{if .IsLogin}}
+                <script language="javascript" type="text/javascript">
+                    // 以下方式直接跳转
+                    window.location.href='/myself';
+                </script>
+            {{end}}
+            <div class="d-flex justify-content-center login-wrapper">
+                <div class="col-sm-8 col-md-6 col-xl-4 p-4 card align-self-center login">
+                    <div class="card-header text-center bg-transparent">
+                        <h4 class="mb-0">用户登录</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/login" method="post">
+                            <div class="form-group text-left">
+                                <input type="text" class="form-control required" placeholder="用户名" autocomplete="off" name="name" autofocus="autofocus" maxlength="32">
+                            </div>
+                            <div class="form-group text-left">
+                                <input type="password" class="form-control required" name="passwd" placeholder="密码" maxlength="32">
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-mybg btn-block">登&nbsp;&nbsp;录</button>
+                            </div>
+                        </form>
+                        <form method="get" action="/register">
+                            <button type="button" class="btn btn-mybg btn-block">点我注册</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>

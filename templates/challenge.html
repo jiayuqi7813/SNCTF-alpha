@@ -1,0 +1,101 @@
+{{define "challenge.html"}}
+<style>
+  /*测试按钮花活*/
+  /*button{
+    background: url("/static/img/button.png");
+    background-size:100% 100%;
+  }*/
+</style>
+
+  <div class="container" id="indexwrapper">
+    <div class="clearfix" style="margin-bottom: 100px;"></div>
+    {{if eq .status 1}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>警告：</strong> {{.msg}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {{end}}
+    {{if eq .status 3}}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>错误：</strong> {{.msg}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {{end}}
+    {{if eq .status 2}}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>成功：</strong> {{.msg}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {{end}}
+
+
+    <div class="row">
+      <div class="col-12" style="">
+        <!-- 分类 ，搞不懂怎么归类-->
+{{range $value,$key :=.category}}
+  <fieldset style="color: black;">
+    <legend>{{$key.Category}}</legend>
+  </fieldset>
+  {{range $.challenges}}
+    {{if eq $key.Category .Category}}
+    <div id="challenge-{{.ID}}" class="col-md-3 d-inline-block challenge-border">
+      <!-- 题目按钮 -->
+      <button class="btn {{if .IsBool}} btn-success {{else}} btn-dark {{end}}w-100 text-truncate pt-3 pb-3 mb-2" data-toggle="modal" data-target="#subj{{.ID}}">
+        <p style="margin-top: 14px;">{{- .Name -}}</p>
+        <span id="challenge-button-score-700">{{.SolveNum}} 次解出</span>
+        <br><span>{{.Score}} 分</span><br>
+      </button>
+
+      <!-- 模态框 -->
+      <div class="modal fade" id="subj{{.ID}}">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+              <h4 class="modal-title">{{.Name}} - {{.Score}}p</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <strong>
+              描述：
+              </strong>
+              <br>
+              <div id="subdescribecontain{{.ID}}">{{.Description}}</div>
+              <br>
+              <strong>
+              附件下载：
+              </strong>
+              <br><br>
+              <a href="{{.FileLink}}" target="_blank">{{.File}}</a>
+              <form action="/submitflag" method="post">
+                <input type="hidden" name="cid" value="{{.ID}}">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="flag" placeholder="flag" aria-label="flag" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary ">提&nbsp;&nbsp;交</button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      {{end}}
+
+  {{end}}
+{{end}}
+
+      </div>
+    </div>
+  </div>
+{{end}}

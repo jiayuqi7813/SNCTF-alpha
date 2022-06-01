@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{template "head.html"}}
+</head>
+<body>
+{{template "navbar.html"}}
+<div class="container" id="indexwrapper">
+    <div class="clearfix" style="margin-bottom: 100px;"></div>
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            {{if .Error}}
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{.Msg}}
+                </div>
+            {{end}}
+            {{if .success}}
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{.Msg}}
+                </div>
+            {{end}}
+            <div class="d-flex justify-content-center login-wrapper">
+                <div class="col-sm-8 col-md-6 col-xl-4 p-4 card align-self-center login">
+                    <div class="card-header text-center bg-transparent">
+                        <h4 class="mb-0">用户注册</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/register" method="post">
+                            <div class="form-group text-left">
+                                <input type="text" class="form-control required" placeholder="用户名" autocomplete="off" name="name" autofocus="autofocus" maxlength="32">
+                            </div>
+                            <div class="form-group text-left">
+                                <input type="text" class="form-control required" placeholder="邮箱" autocomplete="off" name="mail" autofocus="autofocus" maxlength="32">
+                            </div>
+                            <div class="form-group text-left">
+                                <input type="password" class="form-control required" name="passwd" placeholder="密码" maxlength="32">
+                            </div>
+                            <div class="form-group text-left">
+                                <input type="password" class="form-control required" name="veripasswd" placeholder="确认密码" maxlength="32">
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-mybg btn-block">注&nbsp;&nbsp;册</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>

@@ -1,0 +1,38 @@
+{{define "notice.html"}}
+    <div class="container" id="indexwrapper">
+        <div class="clearfix" style="margin-bottom: 100px;"></div>
+            <div class="col-12" style="">
+                {{range $.notice}}
+                <div class="card text-left">
+                    <div class="card-header">
+                       <strong>{{.Title}}</strong>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{.Content}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <script>
+                            // 时间戳转换成日期
+                            function timestampToTime(timestamp) {
+                                var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                                Y = date.getFullYear() + '-';
+                                M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                                D = date.getDate() + ' ';
+                                h = date.getHours() + ':';
+                                m = date.getMinutes() + ':';
+                                s = date.getSeconds();
+                                return Y + M + D + h + m + s;
+                            }
+                            document.writeln(timestampToTime({{.CreatedAt}}));
+                        </script>
+                    </div>
+                </div>
+                    <br>
+                {{end}}
+            </div>
+
+        </div>
+
+
+
+{{end}}

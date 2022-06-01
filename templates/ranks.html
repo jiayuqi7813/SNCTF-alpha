@@ -1,0 +1,32 @@
+{{define "ranks.html"}}
+    <div class="container" id="indexwrapper">
+        <div class="clearfix" style="margin-bottom: 10px;"></div>
+        <h1 class="text-center">排行榜</h1>
+        <div class="clearfix" style="margin-bottom: 40px;"></div>
+
+        <div class="col-12" style="">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">用户名</th>
+            <th scope="col">分数</th>
+            <th scope="col">学号</th>
+            <th scope="col">上次提交时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range $.users}}
+        <tr>
+            <th scope="row">{{.Id}}</th>
+            <td>{{.Username}}</td>
+            <td>{{.Mark}}</td>
+            <td>{{.Stuid}}</td>
+            <td>{{.UpdatedTime}}</td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+        </div>
+    </div>
+{{end}}
